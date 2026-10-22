@@ -1,0 +1,17 @@
+name: Compile
+
+# Checks that every problem's starter code and tests still compile.
+# Tests are NOT run here: unsolved problems fail by design (TODO()).
+on: [push, pull_request]
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v4
+      - run: ./gradlew compileTestKotlin --no-daemon
