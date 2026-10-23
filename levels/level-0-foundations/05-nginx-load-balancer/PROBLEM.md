@@ -4,7 +4,7 @@
 |-----|-------|---------|
 | Nginx | 0 — Foundations | Round robin, least connections, health checks with rise/fall thresholds |
 
-> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Stuck? [`HINTS.md`](HINTS.md).
+> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Not sure what to write? Follow **Your plan, step by step** below. Stuck on a step? [`HINTS.md`](HINTS.md).
 
 ## The real-world situation
 
@@ -43,6 +43,17 @@ class LoadBalancer(strategy: Strategy, fall: Int = 3, rise: Int = 2) {
 ## Example
 
 Round robin over `a, b, c`: `a, b, c, a, …`. Mark `b` down (3 failed checks) → `a, c, a, c`. Two passes later `b` is back in rotation.
+
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`addServer` / `removeServer` / `activeConnections`** with the `Server` class and the `servers` map.
+2. **`acquire()` for ROUND_ROBIN** (all servers healthy for now) + **`release()`**. 🎯 `roundRobinTakesTurns`, `releaseNeverGoesBelowZero`, `removedServersAreNeverChosen`
+3. **`healthCheck()` + `isHealthy()`** — the fall/rise counters. 🎯 `serverGoesDownOnlyAfterFallFailuresInARow`
+4. **Skip unhealthy servers in `acquire()`**. 🎯 `unhealthyServersAreSkippedAndComeBackAfterRisePasses`, `noHealthyServers`
+5. **LEAST_CONNECTIONS** branch in `acquire()`. 🎯 `leastConnectionsPicksTheLeastBusy`
+6. **Errors**: duplicate add, unknown server. 🎯 `invalidCalls`
 
 ## Think about (answer in NOTES.md)
 

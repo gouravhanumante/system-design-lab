@@ -4,7 +4,7 @@
 |-----|-------|---------|
 | GitHub | 0 — Foundations | Resources, HTTP methods, status codes, validation |
 
-> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Stuck? [`HINTS.md`](HINTS.md).
+> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Not sure what to write? Follow **Your plan, step by step** below. Stuck on a step? [`HINTS.md`](HINTS.md).
 
 ## The real-world situation
 
@@ -46,6 +46,18 @@ An issue is represented as the map `{"id": "1", "title": "...", "state": "open"}
 ## Example
 
 `POST /issues {title: "Crash on login"}` → `201 {id: "1", title: "Crash on login", state: "open"}`. `DELETE /issues/1` twice → `204`, then `404`.
+
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **Routing — `handle()`**: work out which endpoint the request is and call the matching function. Unknown path → `404`, known path with the wrong method → `405`. _(No test passes yet — every test needs this.)_
+2. **`createIssue()`** — `POST /issues`. 🎯 `createReturns201WithTheNewIssue`, `createValidatesTheTitle`
+3. **`getIssue()`** — `GET /issues/{id}`. 🎯 `getOneAndNotFound`
+4. **`listIssues()`** — `GET /issues` with the optional `state` filter. 🎯 `listIsSortedAndFilterable`
+5. **`deleteIssue()`** — `DELETE /issues/{id}`. 🎯 `deleteIsIdempotentInEffect`
+6. **`updateIssue()`** — `PATCH /issues/{id}`: validate everything first, then change. 🎯 `patchUpdatesOnlyGivenFieldsAndValidatesFirst`
+7. Run all tests — 🎯 `unknownPathsAndMethods` should pass if step 1 is right.
 
 ## Think about (answer in NOTES.md)
 

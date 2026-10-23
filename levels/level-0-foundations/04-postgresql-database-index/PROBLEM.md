@@ -4,7 +4,7 @@
 |-----|-------|---------|
 | PostgreSQL | 0 — Foundations | Full scan, sorted (B-tree-like) index, hash index, binary search, index maintenance |
 
-> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Stuck? [`HINTS.md`](HINTS.md).
+> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Not sure what to write? Follow **Your plan, step by step** below. Stuck on a step? [`HINTS.md`](HINTS.md).
 
 ## The real-world situation
 
@@ -39,6 +39,16 @@ class UsersTable {
 ## Example
 
 10,000 users, ages 18–80. `findByAge(25, 26)` without an index examines 10,000 rows; after `createIndex("age")` it examines only the ~300 matching ones.
+
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`insert` + `delete`** into `rows` (no indexes yet). Duplicate id → exception.
+2. **`findByAge` / `findByCity` without an index** — a full scan; set `lastRowsExamined` to the number of rows. 🎯 `withoutAnIndexEveryRowIsExamined`
+3. **`createIndex("age")`** — build the sorted index from existing rows, and use it in `findByAge`. 🎯 `sortedIndexOnlyTouchesMatchingRows`, `rangeEdgesAreInclusiveAndEmptyRangesWork`
+4. **`createIndex("city")`** — the hash index, used in `findByCity`. 🎯 `hashIndexForEquality`
+5. **Keep indexes up to date** in `insert`/`delete` (via `addToIndexes`). 🎯 `indexesStayCorrectAfterInsertsAndDeletes`, `invalidOperations`
 
 ## Think about (answer in NOTES.md)
 

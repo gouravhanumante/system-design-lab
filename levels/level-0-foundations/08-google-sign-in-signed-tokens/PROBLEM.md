@@ -4,7 +4,7 @@
 |-----|-------|---------|
 | Google Sign-In | 0 — Foundations | Sessions vs tokens, HMAC signatures, expiry, revocation, stateless servers |
 
-> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Stuck? [`HINTS.md`](HINTS.md).
+> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Not sure what to write? Follow **Your plan, step by step** below. Stuck on a step? [`HINTS.md`](HINTS.md).
 
 ## The real-world situation
 
@@ -44,6 +44,15 @@ class TokenService(secret: ByteArray, ttlSeconds: Long = 3600) {
 ## Example
 
 `issue("alice", 0)` → `"YWxpY2V8MzYwMHwx.<signature>"`. `verify` at 10 → `"alice"`; at 3600 → `null` (expired). Changing `alice` to `admin` inside the payload breaks the signature → `null`.
+
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`issue()`** — build the payload, sign it, join with a dot. 🎯 `tokenFormatIsExact`, `tokenIdsIncrease`, `invalidUserIds`
+2. **`decode()`** — split, base64-decode, check the signature, parse the 3 fields; `null` on any problem.
+3. **`verify()`** — decode + expiry + revoked check. 🎯 `verifyReturnsTheUserUntilExpiry`, `anyServerWithTheSecretCanVerifyButNotOthers`, `tamperingBreaksTheSignature`, `garbageNeverThrows`
+4. **`revoke()`**. 🎯 `revocation`
 
 ## Think about (answer in NOTES.md)
 

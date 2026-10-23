@@ -4,7 +4,7 @@
 |-----|-------|---------|
 | Flipkart | 0 — Foundations | Primary/replica, replication lag, eventual consistency, read-your-writes routing |
 
-> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Stuck? [`HINTS.md`](HINTS.md).
+> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Not sure what to write? Follow **Your plan, step by step** below. Stuck on a step? [`HINTS.md`](HINTS.md).
 
 ## The real-world situation
 
@@ -37,6 +37,16 @@ class ReplicatedDb(replicaCount: Int = 2, lagSeconds: Long = 5) {
 ## Example
 
 Lag 5. Alice writes `address = Pune` at 10. Alice reads at 11 → primary → `Pune`. Bob reads at 11 → replica → `null` (stale!). At 15 the replicas have it.
+
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **Config check** in `init`. 🎯 `invalidConfig`
+2. **`write()`** — append `(time, value)` to the key's history; remember the user's last write time.
+3. **`valueAt()`** helper — the value a key had at a moment in time.
+4. **`read()` from replicas**: value as of `now - lagSeconds`, rotate `replica-0`, `replica-1`, …, count stale reads. 🎯 `otherUsersMaySeeStaleDataUntilTheLagPasses`, `replicasShowOldValuesNotJustMissingOnes`, `zeroLagMeansReplicasAreAlwaysFresh`
+5. **Read-your-writes**: a user who wrote recently reads from the primary. 🎯 `writerReadsTheirOwnWriteFromThePrimary`, `readYourWritesWindowEnds`, `anyRecentWriteRoutesAllOfTheUsersReadsToPrimary`
 
 ## Think about (answer in NOTES.md)
 

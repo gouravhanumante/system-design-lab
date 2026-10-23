@@ -4,7 +4,7 @@
 |-----|-------|---------|
 | Bitly | 0 — Foundations | Base62 encoding, counters vs hashes, custom aliases, redirects |
 
-> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Stuck? [`HINTS.md`](HINTS.md).
+> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Not sure what to write? Follow **Your plan, step by step** below. Stuck on a step? [`HINTS.md`](HINTS.md).
 
 ## The real-world situation
 
@@ -40,6 +40,16 @@ class UrlShortener {
 ## Example
 
 `shorten("https://amazon.in/dp/B0C…")` → `"1"`, next new URL → `"2"`. `customAlias("sale", …)` → `true`. After resolving `"1"` twice, `clicks("1") = 2`.
+
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`encodeBase62()`** — number → short text. 🎯 `base62Encoding`
+2. **`decodeBase62()`** — short text → number. 🎯 `base62RoundTrip`
+3. **`isValidUrl()`** helper, then **`shorten()`** + **`resolve()`** (without click counting first). 🎯 `shortenAndResolve`, `sameUrlGivesSameCode`, `invalidLongUrls`
+4. **`customAlias()`**. 🎯 `customAliases`, `generatedCodesSkipAliasesAndAliasesCannotStealCodes`, `aliasForAUrlDoesNotChangeShortenBehaviour`
+5. Count clicks in `resolve()` and return them from **`clicks()`**. 🎯 `clicksAreCounted`
 
 ## Think about (answer in NOTES.md)
 

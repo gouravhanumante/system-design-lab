@@ -4,7 +4,7 @@
 |-----|-------|---------|
 | Amazon SQS | 0 — Foundations | Message queues, visibility timeout, ack, redelivery, dead-letter queue |
 
-> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Stuck? [`HINTS.md`](HINTS.md).
+> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Not sure what to write? Follow **Your plan, step by step** below. Stuck on a step? [`HINTS.md`](HINTS.md).
 
 ## The real-world situation
 
@@ -46,6 +46,17 @@ class WorkQueue(visibilityTimeoutSeconds: Long = 30, maxReceives: Int = 3) {
 ## Example
 
 Timeout 30. Worker A receives `m1` at 0 (receipt `m1#1`) and crashes. At 30 `m1` is visible again; worker B receives it (`m1#2`). A wakes up and acks `m1#1` → `false` (stale receipt). B acks `m1#2` → deleted.
+
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`send()`** — store an `Entry`, ids `m1, m2, …`.
+2. **`receive()`** — first visible message, make it invisible for the timeout, give it a new receipt. 🎯 `receivedMessagesAreHiddenNotDeleted`, `unackedMessageReappearsAfterTheTimeout`, `fifoOrderAmongVisibleMessages`
+3. **`findByReceipt()` + `ack()`**. 🎯 `sendReceiveAck`, `ackAfterTheTimeoutFails`, `unknownReceipts`
+4. **`extendVisibility()`**. 🎯 `extendingVisibilityKeepsTheMessageHidden`
+5. **Dead letters** in `receive()` + `deadLetters()`. 🎯 `poisonMessagesGoToTheDeadLetterQueue`
+6. **`visibleCount()` / `inFlightCount()`** (used by several tests).
 
 ## Think about (answer in NOTES.md)
 

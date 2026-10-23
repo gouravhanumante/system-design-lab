@@ -4,7 +4,7 @@
 |-----|-------|---------|
 | Redis | 0 — Foundations | Transactions, atomicity, rollback, nested layers of changes |
 
-> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Stuck? [`HINTS.md`](HINTS.md).
+> New to an idea in here? Read [`CONCEPTS.md`](CONCEPTS.md) first — it explains how things work, without giving away the solution. Not sure what to write? Follow **Your plan, step by step** below. Stuck on a step? [`HINTS.md`](HINTS.md).
 
 ## The real-world situation
 
@@ -48,6 +48,16 @@ begin
   rollback        -> get a = 20
 commit            -> get a = 20 (committed)
 ```
+
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`set` / `get` / `delete` with no transaction** (just use `data`). 🎯 `plainSetGetDelete`
+2. **`begin` + `rollback`**: start writing into a new layer, and throw it away on rollback. Update `set`/`get`/`delete` to use the top layer when there is one. 🎯 `rollbackDiscardsChanges`, `noTransactionToCloseReturnsFalse`
+3. **`commit`**: merge the top layer down. 🎯 `commitKeepsChanges`, `nestedTransactions`, `innerCommitStillRollsBackWithTheOuter`
+4. **Deletes inside a transaction** (store a `null` marker). 🎯 `deleteInsideATransactionHidesCommittedValueUntilRollback`
+5. **`count`** — count over the *current view*. 🎯 `countSeesTheCurrentView`
 
 ## Think about (answer in NOTES.md)
 
