@@ -35,6 +35,13 @@ class ViewTracker(windowSeconds: Long = 1800) {
 
 Window 1800. User `u` watches `v` at `0` ✔ counted, at `100` ✘, at `1799` ✘, at `1800` ✔ counted (window restarts at 1800), at `2000` ✘.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`views()`** and the `counts` map.
+2. **`watch()`** — look up when this user's view of this video was last counted. 🎯 all tests (`firstWatchCounts`, `repeatWithinWindowDoesNotCount`, `countsAgainExactlyAtTheWindowEdgeAndWindowRestarts`, `uncountedWatchesDoNotExtendTheWindow`, `usersAndVideosAreIndependent`, `separatorCharactersInIdsDoNotCollide`)
+
 ## Think about (answer in NOTES.md)
 
 - Memory: you now store one timestamp per `(user, video)` pair. With a billion users that is too much. What can you throw away, and when?

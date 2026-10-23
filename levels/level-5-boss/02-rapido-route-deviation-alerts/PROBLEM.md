@@ -39,6 +39,15 @@ class RouteMonitor(thresholdMeters: Int, consecutivePings: Int) {
 
 Route `(0,0) → (1000,0)`, threshold 50, 3 pings. Pings at `(500, 60)`, `(500, 80)`, `(500, 90)` → the third returns `true`. A 4th ping at `(500, 100)` returns `false` (already alerted).
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`startTrip()`** / **`endTrip()`** / **`alerts()`**. 🎯 `routeNeedsAtLeastTwoPoints`
+2. **`distanceToSegmentSquared()`** — the geometry part. 🎯 `distanceIsMeasuredToTheSegmentNotJustTheCorners` (with step 4)
+3. **`distanceToRouteSquared()`** — closest of all segments. 🎯 `polylineWithACorner` (with step 4)
+4. **`ping()`** — off-route streak and one alert per streak. 🎯 `onRoutePingsNeverAlert`, `alertsOnTheNthConsecutiveOffRoutePingOnlyOnce`, `thresholdIsStrict`, `anOnRoutePingResetsTheStreak`, `canAlertAgainAfterReturningToTheRoute`, `tripsAreIndependentAndEndedTripsAreIgnored`
+
 ## Think about (answer in NOTES.md)
 
 - GPS is noisy. Why is "N pings in a row" better than "one bad ping"? What are other options (time-based, speed-aware)?

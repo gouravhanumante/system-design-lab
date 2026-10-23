@@ -43,6 +43,16 @@ class ConsumerGroups(topic: Topic) {
 
 Partition has 5 messages. Group `g`: `poll(…, 3)` → offsets 0–2, `commit`, `poll(…, 2)` → offsets 3–4, **crash** (`restart("g")`), `poll(…, 10)` → offsets 3–4 again.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`poll()`** — read from the group's position and move it forward. 🎯 `pollAdvancesThePosition`, `groupsAreIndependent`, `partitionsAreTrackedSeparately`
+2. **`commit()`** + **`committed()`**. 🎯 `commitIsSeparateFromPosition`
+3. **`restart()`**. 🎯 `crashBeforeCommitCausesRedelivery`, `restartWithoutAnyCommitStartsFromTheBeginning`
+4. **`lag()`**. 🎯 `lagIsDistanceFromTheEndOfTheLogToTheCommit`
+5. **`seek()`**. 🎯 `seekAllowsReplayAndSkipping`
+
 ## Think about (answer in NOTES.md)
 
 - If the consumer commits **before** processing each message, what delivery guarantee do you get? What about committing **after**? Which would you pick for "charge the customer"?

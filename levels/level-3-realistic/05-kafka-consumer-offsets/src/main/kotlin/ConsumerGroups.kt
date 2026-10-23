@@ -24,28 +24,50 @@ class Topic(val partitionCount: Int) {
 // ---- Your job ----
 class ConsumerGroups(private val topic: Topic) {
 
+    // ───────────── State ─────────────
+    // Both maps are keyed by (group, partition). A missing entry means 0.
+
+    /** Where the group will read next — lives in the consumer's memory, LOST on a crash. */
+    private val position = HashMap<Pair<String, Int>, Long>()
+
+    /** The last offset the group saved ("I've processed everything before this") — survives a crash. */
+    private val committedOffset = HashMap<Pair<String, Int>, Long>()
+
+    // ───────────── API ─────────────
+
+    /** Step 1 — read up to [maxRecords] from the group's position in that partition, and move the position past what was returned. */
     fun poll(group: String, partition: Int, maxRecords: Int): List<Record> {
-        TODO()
+        TODO("Step 1")
     }
 
+    /** Step 2 — save the current position as the committed offset. */
     fun commit(group: String, partition: Int) {
-        TODO()
+        TODO("Step 2")
     }
 
-    /** Simulates a crash: positions go back to the committed offsets. */
+    /**
+     * Step 3 — simulate the consumer crashing and starting again: for EVERY partition of the topic,
+     * the group's position goes back to its committed offset (0 if never committed). Records after it get delivered again.
+     */
     fun restart(group: String) {
-        TODO()
+        TODO("Step 3")
     }
 
+    /**
+     * Step 5 — move the position (replay old records or skip ahead). Valid offsets: `0..topic.endOffset(partition)`
+     * (the end itself is allowed); anything else → `IllegalArgumentException`. Does NOT commit.
+     */
     fun seek(group: String, partition: Int, offset: Long) {
-        TODO()
+        TODO("Step 5")
     }
 
+    /** Step 2 — committed offset (0 if never). */
     fun committed(group: String, partition: Int): Long {
-        TODO()
+        TODO("Step 2")
     }
 
+    /** Step 4 — how far behind the group is: end of the partition's log minus the COMMITTED offset. */
     fun lag(group: String, partition: Int): Long {
-        TODO()
+        TODO("Step 4")
     }
 }

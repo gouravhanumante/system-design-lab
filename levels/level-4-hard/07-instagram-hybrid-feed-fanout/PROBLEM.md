@@ -49,6 +49,14 @@ class FeedService(celebrityThreshold: Int = 3) {
 
 Threshold 3. `eve` has 2 followers and posts `e1` → 2 push-writes. A third user follows → `eve` is now a celebrity. `eve` posts `e2` → no push-writes; followers still see `e2` when they open their feed (pulled).
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`follow()`** — remember when each follow started; mark celebrities. 🎯 `selfFollowAndDuplicateFollowAreIgnored`
+2. **`post()`** — store it; push to followers unless the author is a celebrity. 🎯 `ordinaryAuthorsArePushedToEachFollower`, `pushWritesStayProportionalToFollowersOfOrdinaryAccountsOnly`
+3. **`feed()`** — pushed posts + pulled celebrity posts, merged without duplicates. 🎯 `celebrityPostsAreNotPushedButStillAppearInFeeds`, `feedMergesPushedAndPulledNewestFirst`, `becomingACelebrityMidwayDoesNotDuplicateOrLosePosts`, `youNeverSeePostsFromBeforeYouFollowed`, `ordinaryAuthorsAlsoOnlyReachCurrentFollowers`, `equalTimestampsAreOrderedByPostId`, `feedOfUnknownUserIsEmpty`
+
 ## Think about (answer in NOTES.md)
 
 - What is the break-even: at what follower count and read rate does pull beat push? Who reads their feed far more often than others post?

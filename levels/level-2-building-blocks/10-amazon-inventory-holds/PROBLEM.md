@@ -42,6 +42,15 @@ class Inventory(holdSeconds: Long = 600) {
 
 Stock 1. Order A holds 1 at `t = 0` → available 0, so B's hold fails. A abandons; at `t = 600` the hold has expired → available 1, B succeeds. A tries `confirm` at 601 → `false`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`addStock()`**, **`isActive()`**, **`available()`**, **`hold()`** (new orders only). 🎯 `holdReducesAvailability`, `cannotOversell`, `holdsExpireExactlyOnTime`
+2. **`confirm()`** + **`sold()`**. 🎯 `confirmTurnsHoldIntoSaleAndIsIdempotent`
+3. **`release()`**. 🎯 `releaseReturnsStock`
+4. **Repeated holds** for the same order in `hold()`. 🎯 `repeatedHoldIsIdempotentButConflictingHoldIsAnError`, `anOrderCanHoldAgainAfterItsHoldExpiredOrWasReleased`, `stockCanBeAddedLaterAndInputsAreValidated`
+
 ## Think about (answer in NOTES.md)
 
 - In a real database, two servers check `available >= 1` at the same moment. How do you make check-and-hold **atomic**? (Row lock? `UPDATE … WHERE available >= 1`? Optimistic version check?)

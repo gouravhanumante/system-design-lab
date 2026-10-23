@@ -35,6 +35,14 @@ Riders `R1(0,0)`, `R2(4,0)`; captains `C1(3,0)`, `C2(-5,0)`.
 First-come-first-served gives `R1→C1`, `R2→C2` (total squared distance 9 + 81 = 90).
 The global greedy rule picks the pair `(R2, C1)` first (distance 1), leaving `R1→C2` (25). Total 26.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`distanceSquared()`**.
+2. **`allPairs()`** — every (rider, captain) pair with its distance, sorted by distance, then rider id, then captain id.
+3. **`matchBatch()`** — walk the sorted pairs and take each one whose rider and captain are both still free. 🎯 `globalGreedyBeatsFirstComeFirstServed`, `moreRidersThanCaptainsLeavesTheFarthestUnmatched`, `moreCaptainsThanRiders`, `tiesPreferSmallerRiderIdThenSmallerCaptainId`, `emptyInputs`, `everyoneGetsMatchedWhenCountsAreEqualAndNoOneIsReusedTwice`, `doesNotModifyInputs`
+
 ## Think about (answer in NOTES.md)
 
 - Is the global-greedy answer always the *best possible* total? (Look up the Hungarian algorithm.) Why do real systems often accept "good enough"?

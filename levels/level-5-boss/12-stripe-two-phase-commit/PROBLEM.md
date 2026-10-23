@@ -55,6 +55,14 @@ Return a map `txId → outcome` for the transactions it handled.
 
 Participants `hdfc` and `sbi` both vote yes → log: `begin t1 hdfc,sbi`, `decision t1 COMMIT`, `done t1`. If `sbi` votes no → `hdfc` is told to abort even though it voted yes.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`execute()`** validation + phase 1 (prepare / votes) + **`abortAll()`**. 🎯 `oneNoVoteAbortsEveryoneAndStopsPreparing`, `anExceptionDuringPrepareCountsAsNo`, `invalidCalls`
+2. **`commitAll()`** — phase 2 with retries. 🎯 `everyoneVotesYesSoItCommits`, `commitIsRetried`
+3. **`recover()`** — read the log and finish unfinished transactions. 🎯 `commitThatKeepsFailingIsInDoubtAndRecoverFinishesIt`, `recoveryAfterACrashUsesOnlyTheLog`
+
 ## Think about (answer in NOTES.md)
 
 - 2PC is called a **blocking** protocol: if the coordinator dies after participants voted yes, they must hold their locks until it comes back. Why can't a participant decide on its own?

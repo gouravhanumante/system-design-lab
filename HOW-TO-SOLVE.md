@@ -21,7 +21,9 @@ Answer these in a few words:
 Write a rough version straight into `NOTES.md` section 2.
 
 ### 4. Code it (30–120 min)
-- Open `src/main/kotlin/…kt` and replace the `TODO()`s. Add private classes and helpers freely; don't change the public API (names, parameters, return types).
+- Open `src/main/kotlin/…kt`. Every field and function you need is already declared, with a comment saying exactly what it must do — you only write the bodies (replace the `TODO()`s).
+- Follow **"Your plan, step by step"** in `PROBLEM.md`: it gives the order, and 🎯 marks the tests that check each step. Run those tests after each step.
+- You may change the private parts (rename, add helpers, use other data structures) if you have a better idea — just don't change the public API (names, parameters, return types).
 - Run the tests early and often: `./gradlew :<module>:test`, or ▶ in the IDE.
 - **Don't edit the tests.** If you believe a test is wrong, write it down in `NOTES.md` and ask for a review.
 - Stuck for 20+ minutes? Open **one** hint in `HINTS.md`. Then try again before opening the next.

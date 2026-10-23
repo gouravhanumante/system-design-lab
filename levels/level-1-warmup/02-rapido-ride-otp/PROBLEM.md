@@ -35,6 +35,13 @@ class RideOtp(generator: () -> String) {
 
 `generator` yields `"4821"`. `issue("r1")` → `"4821"`. `verify("r1", "0000")` → `false`, then `verify("r1", "4821")` → `true`, then `verify("r1", "4821")` → `false`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`issue()`** — create the code the first time, return the same one afterwards. 🎯 `issueReturnsGeneratedCodeAndIsStable`
+2. **`verify()`** — right code, first time only. 🎯 `rightCodeWorksOnce`, `wrongCodeFailsAndDoesNotBurnTheRealOne`, `unknownRideNeverVerifies`, `ridesAreIndependent`
+
 ## Think about (answer in NOTES.md)
 
 - Why a code **per ride** instead of one fixed PIN per user? What leaks if a PIN is overheard once?

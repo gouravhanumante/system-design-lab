@@ -62,6 +62,15 @@ class TripService {
 
 Surge `1.5`, distance 5000 m, trip took 14 min 10 s (→ 15 minutes): `(50 + 60 + 30) × 1.5 = 210`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`rideOrThrow()`** + **`requireState()`** helpers + **`request()`** + **`state()`** + **`fare()`**. 🎯 `unknownAndDuplicateRides`, `fareIsNullBeforeCompletion`
+2. **`match()` → `arrive()` → `start()`** — each checks the current state. 🎯 `illegalTransitionsThrow`
+3. **`calculateFare()`** + **`complete()`**. 🎯 `happyPathAndFareWithSurge`, `minimumFareApplies`, `surgeIsAppliedBeforeMinimumAndRoundingIsHalfUp`, `tripOfZeroSecondsStillCostsOneMinute`
+4. **`cancel()`** for rider and driver. 🎯 `riderCancelFeeDependsOnHowLongAfterMatch`, `driverCancelSendsRideBackToMatchingWithoutFee`
+
 ## Think about (answer in NOTES.md)
 
 - Why store the *surge* with the ride instead of looking it up at completion time?

@@ -36,6 +36,14 @@ class GridIndex(cellSize: Int) {
 
 `cellSize = 10`. Driver `A` at `(5, 5)` is in cell `(0, 0)`; `B` at `(-1, 12)` is in cell `(-1, 1)`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`cellOf()`** — which grid cell a point is in (careful with negative numbers).
+2. **`update()`** + **`remove()`** — keep `cells` and `positions` in sync. 🎯 `movingADriverRemovesItFromTheOldCell`, `removeForgetsTheDriver`
+3. **`withinRadius()`** — only visit the cells the circle can touch, check exact distance, sort, set `lastScanCount`. 🎯 `findsDriversWithinRadiusNearestFirst`, `boundaryIsInclusive`, `negativeCoordinatesWork`, `tiesAreOrderedById`, `matchesBruteForceOnRandomData`, `smallQueriesDoNotScanEveryDriver`
+
 ## Think about (answer in NOTES.md)
 
 - How do you pick `cellSize`? What goes wrong if it is far too small or far too large?

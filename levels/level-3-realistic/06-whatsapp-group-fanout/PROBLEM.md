@@ -42,6 +42,14 @@ class GroupChat {
 
 Members `a, b, c`. `a` sends `m1` → recipients `{b, c}`. `d` joins afterwards → `d` never gets `m1`. `b` reads → not read by all. `c` leaves → `isReadByAll(m1)` is `true` (only `b` is left and has read it).
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`addMember` / `removeMember` / `send` / `inbox`** — each message remembers who it was sent to. 🎯 `everyoneButTheSenderReceivesTheMessage`, `inboxKeepsSendOrder`, `lateJoinersDoNotSeeOldMessages`, `leavingKeepsAlreadyReceivedMessages`, `nonMembersCannotSendAndDuplicatesAreIgnored`
+2. **`markRead` / `readBy`**. 🎯 `readReceiptsOnlyCountForRecipients`
+3. **`isReadByAll`**. 🎯 `readByAllNeedsEveryCurrentRecipient`, `membersWhoLeftNoLongerBlockReadByAll`, `lateJoinersAreNotRequiredToReadOldMessages`, `soloSenderAndUnknownMessages`
+
 ## Think about (answer in NOTES.md)
 
 - For a group of 1,000 members and 50 messages per second, what does "one delivery row per recipient" cost? What would you store instead?

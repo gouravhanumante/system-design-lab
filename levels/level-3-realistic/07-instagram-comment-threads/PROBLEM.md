@@ -46,6 +46,15 @@ ann: nice
 
 Then delete `c3` too → only `ann: nice` remains.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`add()`** + **`count()`**. 🎯 `invalidOperationsAreRejected` (with step 2)
+2. **`delete()`** (just a flag).
+3. **`renderInto()`** + **`render()`** without deletes. 🎯 `rendersDepthFirstWithIndentation`, `siblingsKeepInsertionOrder`, `postsAreSeparate`, `deepChainsDoNotBreak`
+4. **`hasVisibleContent()`** — placeholders and pruning. 🎯 `deletedCommentWithLiveRepliesBecomesAPlaceholder`, `deletedLeafDisappears`, `deletedBranchWithNothingAliveIsPruned`, `deletingEverythingRendersNothing`, `repliesCanBeAddedUnderDeletedComments`
+
 ## Think about (answer in NOTES.md)
 
 - A viral post has 300,000 comments. `render` returns all of them — what should the API really do (pagination? "view 12 more replies"?), and how does that change how you store the tree?

@@ -35,6 +35,14 @@ class Autocomplete(maxSuggestions: Int = 5) {
 
 Queries: `iphone case` ×5, `iphone charger` ×3, `ipad` ×4. `suggest("iph")` → `["iphone case", "iphone charger"]`, visiting 4 nodes (root, i, p, h). `suggest("ip")` → `["iphone case", "ipad", "iphone charger"]`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`normalize()`**.
+2. **`updateTopList()`** + **`addQuery()`** — every node on the path keeps its own top list.
+3. **`suggest()`** — walk the prefix and read the stored list. 🎯 `suggestsByCountThenAlphabetically`, `onlyVisitsThePrefixPath`, `countsAccumulateAndReorder`, `normalisation`, `limitAndTies`, `aQueryIsAlsoAPrefixOfLongerOnes`, `invalidCount`, `matchesBruteForceOnRandomData`
+
 ## Think about (answer in NOTES.md)
 
 - Precomputing top-k in every node makes reads O(prefix length) but writes more expensive. How many nodes does one `addQuery` update?

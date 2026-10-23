@@ -37,6 +37,13 @@ class AppendLog {
 
 Append `"a"`, `"b"`, `"c"` → offsets 0, 1, 2. `read(1, 5)` → records at offsets 1 and 2. `endOffset()` is 3.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`append()`** + **`endOffset()`**. 🎯 `offsetsStartAtZeroAndIncrease`
+2. **`read()`**. 🎯 `readReturnsRecordsFromTheGivenOffset`, `readingAtOrPastTheEndIsEmpty`, `maxRecordsOfZeroOrLessReturnsNothing`, `negativeOffsetIsRejected`, `laterAppendsAreVisibleToLaterReads`, `largeLog`
+
 ## Think about (answer in NOTES.md)
 
 - Why is an append-only log so fast on a real disk compared with updating rows in a database?

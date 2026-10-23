@@ -41,6 +41,13 @@ class OtpService(ttlSeconds: Long = 600, maxAttempts: Int = 3, generator: () -> 
 
 TTL 600, issued at `t = 0`. `verify("r", "1234", 599)` can succeed. `verify("r", "1234", 600)` → `EXPIRED`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`issue()`** — always a fresh `OtpRecord`. 🎯 `reissueReplacesTheOldCodeAndClearsLockAndUsedFlags`, `reissueExtendsTheDeadline` (with step 2)
+2. **`verify()`** — check the cases in the exact order of the comment. 🎯 `correctCodeWithinTtlIsOk`, `expiresExactlyAtTtl`, `usedCodeCannotBeReused`, `unknownRide`, `locksAfterMaxWrongAttemptsEvenForTheRightCode`, `twoWrongAttemptsThenRightCodeStillWorks`, `expiredAttemptsDoNotCountAsWrongGuesses`, `lockedTakesPriorityOverExpired`
+
 ## Think about (answer in NOTES.md)
 
 - Compare with a **static PIN**: what protection does it lose? What does it gain (works offline, no SMS cost)?

@@ -42,6 +42,15 @@ class GroupCoordinator(partitions: Int, sessionTimeoutSeconds: Long = 10) {
 
 Timeout 10. `a` and `b` join at time 0, `a` sends a heartbeat at 8. At `checkTimeouts(10)`, `b` has been silent for 10 s → removed; `a` receives all partitions.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`rebalance()`** — range assignment over the sorted members.
+2. **`join()`** / **`leave()`** + **`assignment()`** / **`generation()`**. 🎯 `rangeAssignmentSplitsEvenly`, `extraPartitionsGoToTheFirstMembers`, `moreMembersThanPartitionsLeavesSomeIdle`, `emptyGroupHasNoAssignment`, `joiningAndLeavingRebalances`, `rejoiningOrLeavingUnknownMembersDoesNotRebalance`, `everyPartitionIsOwnedByExactlyOneMember`
+3. **`heartbeat()`**. 🎯 `heartbeatKeepsAMemberAlive` (with step 4)
+4. **`checkTimeouts()`**. 🎯 `timeoutBoundaryAndRepeatedChecks`, `severalTimeoutsAtOnceCauseOneRebalance`, `kickedMembersLearnItFromTheirNextHeartbeat`
+
 ## Think about (answer in NOTES.md)
 
 - During a rebalance every consumer stops reading ("stop-the-world"). What would **incremental / sticky** assignment change?

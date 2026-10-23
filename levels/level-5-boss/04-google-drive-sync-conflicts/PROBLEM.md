@@ -60,6 +60,15 @@ class SyncClient(device: String, server: SyncServer) {
 
 Laptop and phone both have `a.txt` at revision 1. Laptop edits and syncs → revision 2. The phone (still offline) edits and syncs → its push has base 1 ≠ 2 → `Conflict`. Phone now has `a.txt` = laptop's text and `a.txt (conflict phone)` = its own edit, which gets pushed as a brand-new file. Nothing was lost.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **Server: `push()`, `fetch()`, `snapshot()`**. 🎯 `serverAcceptsNewFilesOnlyWithBaseZero`, `serverAppliesRevisionRules`
+2. **Client: `edit()`, `read()`, `files()`**. 🎯 `editingToTheSameContentDoesNothing` (with step 3)
+3. **`sync()` part 1 — push dirty files** (Accepted only), **part 2 — pull from the server**. 🎯 `newFilesPropagateToOtherDevices`, `updatesPropagateAndRevisionsIncrease`, `identicalConcurrentEditsAreNotAConflict`
+4. **Conflicts** in `sync()` with **`conflictCopyName()`**. 🎯 `concurrentEditsCreateAConflictCopyAndLoseNothing`, `sameNewFileNameCreatedOnTwoDevices`, `secondConflictOnTheSameFileGetsANumberedCopy`, `threeDevicesConvergeAfterEveryoneSyncsTwice`
+
 ## Think about (answer in NOTES.md)
 
 - Why a conflict **copy** instead of "last write wins"? When would last-write-wins be acceptable (and for what kind of data)?

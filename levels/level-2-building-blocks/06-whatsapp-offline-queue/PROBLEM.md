@@ -40,6 +40,14 @@ class OfflineInbox(ttlSeconds: Long = 30L * 24 * 3600) {
 
 TTL 100. `send("bob","m1","hi",0)`, `send("bob","m2","there",50)`. `connect("bob", 100)` → only `["there"]` (m1 is exactly 100 s old = expired).
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`connect()` (without expiry) / `disconnect()` / `isOnline()` / `delivered()`** and **`send()`**. 🎯 `onlineUsersGetMessagesImmediately`, `offlineMessagesWaitAndArriveInOrderOnConnect`, `connectingTwiceDoesNotRedeliver`, `disconnectThenMessagesQueueAgain`
+2. **Expiry** in `connect()`. 🎯 `expiredMessagesAreDroppedExactlyAtTheTtl`, `everythingExpiredMeansNothingDelivered`
+3. **Duplicate message ids** in `send()`. 🎯 `retriesOfTheSameMessageAreIgnored`, `sameMessageIdForDifferentUsersAreDifferentMessages`
+
 ## Think about (answer in NOTES.md)
 
 - Where would the real queue live (memory? database?) and what happens to queued messages if the server restarts?

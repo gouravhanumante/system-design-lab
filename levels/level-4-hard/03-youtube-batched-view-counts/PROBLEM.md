@@ -40,6 +40,14 @@ class ViewCountService(store: ViewStore, flushThreshold: Int = 100) {
 
 Threshold 100: 250 views of one video cause 2 `add(…, 100)` calls; 50 views stay buffered. `views()` still reports 250. After `flushAll()` there is a third call `add(…, 50)`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`recordView()`** — +1 in the buffer; when it reaches `flushThreshold`, write it to the store in ONE call and clear it. 🎯 `flushesExactlyWhenTheThresholdIsReached`, `manyViewsCauseFarFewerWrites`, `videosAreBufferedIndependently`
+2. **`views()`** — store + buffer. 🎯 `readsAreExactEvenWhileViewsAreBuffered`, `existingStoreValuesAreIncludedInReads`
+3. **`flushAll()`**. 🎯 `flushAllWritesOneCallPerNonEmptyBufferAndNeverZero`, `countsRemainExactAcrossThresholdsAndFlushes`
+
 ## Think about (answer in NOTES.md)
 
 - What happens to buffered views if the server crashes? How could you reduce that loss (write-ahead log, flush every N seconds, replicate the buffer)?

@@ -35,6 +35,14 @@ class ServiceZones {
 
 Zone `HSR` is the square (0,0)–(10,10). `(5, 5)` → `HSR`; `(10, 3)` (on the edge) → `HSR`; `(11, 5)` → `null` with `lastFullChecks = 0` (the box already rules it out).
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`Zone`** bounding box + **`addZone()`**. 🎯 `invalidZones`
+2. **`isOnEdge()`** + **`isInside()`** — border check and ray casting. 🎯 `insideOutsideAndBorder`, `concavePolygonNotchIsOutside`, `triangleAndDiagonalEdge`, `rayPassingThroughAVertexIsCountedCorrectly`
+3. **`zoneFor()`** — bounding box first, then the full test; pick by priority. 🎯 `priorityThenIdDecideOverlaps`, `boundingBoxSkipsFarZones`, `boxContainsPointButPolygonDoesNot`
+
 ## Think about (answer in NOTES.md)
 
 - Real coordinates are latitude/longitude on a sphere. When does treating them as flat x/y go wrong?

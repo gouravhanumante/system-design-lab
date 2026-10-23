@@ -39,6 +39,14 @@ class Topic(partitions: Int) {
 
 3 partitions. `produce("user-1", …)` always lands in the same partition; if `"user-1".hashCode()` is 1,000,000 the partition is `floorMod(1000000, 3) = 1`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`choosePartition()`** — key hash, or round robin when there's no key. 🎯 `keyedMessagesGoToHashPartition`, `negativeHashCodesStillMapToAValidPartition`, `unkeyedMessagesAreRoundRobin`, `keyedMessagesDoNotAdvanceTheRoundRobinCounter` (with step 2)
+2. **`produce()`**. 🎯 `sameKeyAlwaysSamePartitionAndOrderIsKept`, `partitionsHaveIndependentOffsets`
+3. **`requireValidPartition()`**, **`read()`**, **`endOffset()`**. 🎯 `readBehavesLikeALogPerPartition`, `invalidPartitionsAreRejected`
+
 ## Think about (answer in NOTES.md)
 
 - Ordering is guaranteed **inside** a partition only. What does that mean for a consumer that reads two partitions?

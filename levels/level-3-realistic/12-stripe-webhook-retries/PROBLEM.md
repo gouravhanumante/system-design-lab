@@ -46,6 +46,15 @@ A **delivery** is one `(eventId, endpoint)` pair, written `"<eventId>-><endpoint
 
 base 10, max 3, endpoint always failing: attempt 1 at t=0, then due 10, attempt 2 at t=10, due 30, attempt 3 at t=30 → dead letter.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`enqueue()`**, **`pending()`**, **`delivered()`**, **`deadLetters()`**. 🎯 `duplicatesAreIgnored`
+2. **`tick()`** — attempt due deliveries, success path. 🎯 `healthyEndpointGetsItOnFirstTry`, `dueDeliveriesAreProcessedInOrderAndOnlyOncePerTick`
+3. **Failures** in `tick()`: backoff with **`retryDelay()`**, dead letters after the last attempt. 🎯 `exponentialBackoffThenDeadLetter`, `delayIsCountedFromTheActualAttemptTime`, `exceptionsCountAsFailures`, `recoveringEndpointGetsTheRetry`
+4. **`redrive()`**. 🎯 `redriveFromTheDeadLetterQueue`
+
 ## Think about (answer in NOTES.md)
 
 - Because of retries, your server may receive the **same event twice**. How should a webhook handler protect itself? (You've seen the answer several times in this repo.)

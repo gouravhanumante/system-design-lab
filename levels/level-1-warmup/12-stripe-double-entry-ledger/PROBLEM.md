@@ -40,6 +40,14 @@ class Ledger {
 
 `world` (may go negative), `alice`, `bob`. `transfer("t1", world, alice, 500)` → alice 500, world −500. `transfer("t2", alice, bob, 800)` → `false`. Sum of balances: always 0.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`openAccount()`**, **`accountOrThrow()`**, **`balance()`**, **`entries()`**, **`sumOfBalances()`**.
+2. **`transfer()`** — two entries per transfer. 🎯 `moneyMovesWithTwoEntries`, `insufficientFundsIsRefusedWithoutEntries`, `invalidTransfersThrowAndRecordNothing`, `sumIsAlwaysZero`
+3. **Idempotency** by `txId`. 🎯 `retriesReturnTheOriginalResult`
+
 ## Think about (answer in NOTES.md)
 
 - Why derive the balance from entries instead of storing a `balance` number? When *would* you also store one (and how keep it correct)?

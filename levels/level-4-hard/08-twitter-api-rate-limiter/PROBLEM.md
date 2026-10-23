@@ -40,6 +40,15 @@ class RateLimiter(
 
 Client capacity 2, refill 1 token/s; global huge. Requests at 0, 0, 0 ms → `true, true, false`. At 0 ms `retryAfterMillis` = 1000. At 500 ms the client has 0.5 tokens → retry after 500 ms.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`TokenBucket.refill()`** + **`bucketsFor()`** + **`tryAcquire()`** for one client (global limit large). 🎯 `allowsABurstUpToCapacity`, `refillsOverTime`, `fractionalRefillAccumulates`, `clientsHaveSeparateBuckets`
+2. **`tokens()`**.
+3. **The global bucket** in `tryAcquire()` (both must have a token; refused requests spend nothing). 🎯 `globalBucketLimitsEveryoneTogether`, `aRefusedRequestSpendsNothing`, `steadyRateIsRespectedOverALongRun`
+4. **`TokenBucket.millisUntilOneToken()`** + **`retryAfterMillis()`**. 🎯 `retryAfterRoundsUpAndUsesTheSlowerBucket`
+
 ## Think about (answer in NOTES.md)
 
 - Compare token bucket with **fixed window** ("max 100 per minute starting at :00") — what burst problem does a fixed window have at the boundary?

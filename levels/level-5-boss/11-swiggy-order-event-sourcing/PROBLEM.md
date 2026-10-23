@@ -54,6 +54,16 @@ fun rebuild(events: List<OrderEvent>): OrderProjection
 
 Events arrive as v3 `PICKED_UP(ravi)`, v1 `PLACED(dosa)`, v1 again, v2 `ACCEPTED` → `BUFFERED, APPLIED, DUPLICATE, APPLIED` — and applying v2 also drains v3, so the view shows `PICKED_UP` by `ravi`, version 3.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`nextView()`** — the state machine for one event.
+2. **`apply()`** for in-order events + **`view()`**. 🎯 `happyPathInOrder`, `cancellationRules`, `ordersAreIndependent`
+3. **Duplicates and rejected events** in `apply()`. 🎯 `duplicatesAreIgnored`, `invalidTransitionsAreRejectedWithoutConsumingTheVersion`
+4. **Buffering early events** + draining + **`bufferedCount()`**. 🎯 `earlyEventsAreBufferedAndDrained`, `invalidBufferedEventStopsDraining`
+5. **`rebuild()`**. 🎯 `rebuildFromAnyOrderGivesTheSameState`
+
 ## Think about (answer in NOTES.md)
 
 - Why store events instead of just the latest state? Name three things you can do with the history (audit, debugging, new projections like "average prep time").

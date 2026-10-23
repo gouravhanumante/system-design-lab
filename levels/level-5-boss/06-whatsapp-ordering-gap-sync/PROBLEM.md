@@ -50,6 +50,14 @@ class DeviceClient(server: ChatServer, chatId: String, batchSize: Int = 50) {
 
 Server has messages 1–5. The device receives only 1, 2, 5 via push: `displayed() = [1, 2]`, `hasGap() = true`. After `sync()` it shows 1–5.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **Server: `send()`** (seq per chat, same id → same message) **and `fetch()`**. 🎯 `serverAssignsSequenceNumbersPerChat`, `sendingTheSameMessageIdAgainReturnsTheOriginal`, `fetchReturnsMessagesAfterTheGivenSeqInOrderWithLimit`
+2. **Client: `receive()`, `contiguousUpTo()`, `displayed()`, `hasGap()`**. 🎯 `outOfOrderPushesDisplayOnlyTheContiguousPrefix`, `noGapWhenEverythingArrivedInOrderOrNothingArrived`, `duplicatePushesAreHarmless`, `missingFirstMessageMeansNothingIsDisplayed`
+3. **Client: `sync()`**. 🎯 `syncFillsGaps`, `syncFetchesInBatchesAndStopsOnAShortBatch`, `syncWhenAlreadyUpToDateCostsOneFetch`, `exactMultipleOfBatchSizeNeedsOneExtraEmptyFetch`, `twoDevicesWithDifferentPushesConvergeAfterSync`
+
 ## Think about (answer in NOTES.md)
 
 - Why a server-side counter instead of device timestamps? (Think of phones with wrong clocks.)

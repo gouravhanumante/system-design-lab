@@ -38,6 +38,14 @@ class VersionedFile(maxVersions: Int = 5) {
 
 `maxVersions = 3`. Save `a, b, c, d, e` → versions `[3, 4, 5]`. `restore(3)` creates version `6` with content `"c"` → versions `[4, 5, 6]`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`save()`** (first without the limit) + **`current()`** + **`versions()`** + **`read()`**. 🎯 `emptyFile`, `savesCreateIncreasingVersions`, `savingIdenticalContentDoesNotCreateAVersion`
+2. **Drop the oldest versions** above `maxVersions` in `save()`. 🎯 `oldVersionsAreDroppedAndNumbersAreNeverReused`
+3. **`restore()`**. 🎯 `restoreCreatesANewVersionAndKeepsTheNewerOnes`, `restoringTheCurrentVersionChangesNothing`, `restoreCanPushOldVersionsOut`, `restoreOfUnknownVersionFails`
+
 ## Think about (answer in NOTES.md)
 
 - Storing the full text of every version wastes space when each edit changes one word. How would you store only the *difference*? What does it cost to read an old version?

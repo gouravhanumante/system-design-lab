@@ -39,6 +39,13 @@ class EdgeCache(capacityBytes: Long) {
 
 Capacity 10. Put `a`(4), `b`(4) → used 8. `get(a)` → `a` is now most recent. Put `c`(4) → used 12 > 10 → evict `b` (least recent) → used 8.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`get()`** — count hits and misses, and mark the key as recently used. 🎯 `hitsAndMissesAreCounted`
+2. **`put()`** without eviction, then **`evictUntilFits()`**. 🎯 `evictsTheLeastRecentlyUsed`, `putAlsoCountsAsUse`, `oneBigItemCanEvictSeveralSmallOnes`, `replacingAKeyUpdatesTheSize`, `valuesBiggerThanTheCacheAreNotStored`, `exactlyFullIsFine`, `longRandomWorkloadStaysWithinBudget`
+
 ## Think about (answer in NOTES.md)
 
 - What is the time complexity of your `get` and `put`? The classic O(1) design uses a hash map **plus** a doubly linked list — why both?

@@ -48,6 +48,15 @@ A call "fails" when it throws an exception. Each action and each compensation is
 Steps reserve, charge, ship; `ship` always fails, `maxRetries = 1`:
 `do:reserve, ok:reserve, do:charge, ok:charge, do:ship, retry:ship#1, fail:ship, undo:charge, undone:charge, undo:reserve, undone:reserve` → `COMPENSATED`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`init`** + **`runWithRetries()`**. 🎯 `negativeRetriesRejected`
+2. **`run()`** — the happy path. 🎯 `allStepsSucceed`, `transientFailureIsRetried`, `emptySagaCompletes`
+3. **Compensation** in `run()`. 🎯 `permanentFailureCompensatesCompletedStepsInReverse`, `firstStepFailingNeedsNoCompensation`, `compensationIsRetriedToo`, `stuckCompensationStopsAndFails`
+4. **Same saga id twice**. 🎯 `sameSagaIdIsNotExecutedTwice`
+
 ## Think about (answer in NOTES.md)
 
 - Compensations are not true rollbacks: the customer may have already received a "payment successful" email. How do you design steps so that compensating is acceptable?

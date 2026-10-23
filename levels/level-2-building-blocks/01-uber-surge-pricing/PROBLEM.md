@@ -45,6 +45,14 @@ class SurgePricing(windowSeconds: Long = 60) {
 
 3 drivers, 5 requests in the window → ratio 1.67 → multiplier `1.5`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`recordRequest()`** + **`setAvailableDrivers()`** — store them per zone.
+2. **`demand()`** — drop requests older than the window, count the rest. 🎯 `oldRequestsExpireExactlyAtTheWindowEdge`, `onlyTheNewestRequestsCountAfterTimePasses`
+3. **`multiplier()`** — ratio → band. 🎯 `noRequestsMeansNoSurge`, `ratioBandsMapToMultipliers`, `zoneWithoutDriversCountsAsOneDriver`, `zonesAreIndependent`, `driversCanChange`
+
 ## Think about (answer in NOTES.md)
 
 - Memory: if a zone gets 50,000 requests a minute, what do you keep? Do you need to remember *every* request?

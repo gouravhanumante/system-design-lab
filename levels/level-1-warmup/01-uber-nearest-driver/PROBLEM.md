@@ -35,6 +35,13 @@ class DriverFinder(drivers: List<Driver>) {
 
 Drivers `A(0,0)`, `B(3,4)`, `C(1,1)`. A rider at `(0,0)` asking for `k = 2` gets `["A", "C"]`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`distanceSquared()`** — how far a driver is from the rider (no square root needed to compare).
+2. **`nearest()`** — sort a copy of the drivers by distance, then by id; take `k`. 🎯 all tests (`returnsClosestFirst`, `tiesBrokenByIdAlphabetically`, `kLargerThanDriverCountReturnsAll`, `zeroKAndEmptyList`, `worksWithNegativeCoordinates`, `doesNotModifyTheInput`)
+
 ## Think about (answer in NOTES.md)
 
 - What is the time complexity per query? What if there are 1 million drivers and 10,000 queries per second?

@@ -43,6 +43,14 @@ fun decode(id: Long): SnowflakeParts        // timestamp is relative to the epoc
 
 Worker 5, epoch 0, clock 1000 → first id has parts `(1000, 5, 0)` = `1000 shl 22 or 5 shl 12` = `4194324480`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`init`** check + **`decode()`**. 🎯 `invalidConfiguration`
+2. **`nextId()`** — timestamp, worker, sequence packed into one Long. 🎯 `bitLayoutIsExact`, `customEpochIsSubtracted`, `sequenceIncrementsWithinAMillisecondAndResets`, `idsAreStrictlyIncreasingForOneWorker`, `differentWorkersNeverCollide`, `largeTimestampsDecodeCorrectly`
+3. **Edge cases** in `nextId()`: sequence overflow and clock going backwards. 🎯 `sequenceOverflowWaitsForTheNextMillisecond`, `clockGoingBackwardsIsRefused`
+
 ## Think about (answer in NOTES.md)
 
 - 41 bits of milliseconds is about 69 years. Why do real systems use a **custom epoch** (e.g. 2010) instead of 1970?

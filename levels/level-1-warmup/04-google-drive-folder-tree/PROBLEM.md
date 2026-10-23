@@ -37,6 +37,15 @@ class FileTree {
 
 `mkdir("/a")`, `createFile("/a/x.txt", 10)`, `mkdir("/a/b")`, `createFile("/a/b/y.txt", 5)` → `list("/a") = ["b/", "x.txt"]`, `totalSize("/a") = 15`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`splitPath()`** + **`findNode()`** — walk from the root. 🎯 `rootStartsEmpty`, `existsDistinguishesPresentAndMissing` (with step 2)
+2. **`addNode()`** → **`mkdir()`** / **`createFile()`** + **`exists()`**. 🎯 `cannotCreateWithoutParentOrTwice`, `cannotCreateInsideAFile`
+3. **`list()`**. 🎯 `listIsSortedAndMarksFolders`, `listingAFileOrMissingPathFails`
+4. **`sizeOf()`** + **`totalSize()`** (recursion). 🎯 `totalSizeIsRecursive`, `deepTreesWork`
+
 ## Think about (answer in NOTES.md)
 
 - `totalSize` walks the whole subtree every time. How would you make it O(1) for a huge folder — and what does that cost on every write?

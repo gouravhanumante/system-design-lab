@@ -45,6 +45,17 @@ A *principal* is either a user name or a group name.
 
 `alice` creates `/docs` (OWNER). She shares it with group `team` as EDIT. `bob` is in `team` → `permissionOf("bob", "/docs/q1")` is `EDIT` (inherited). She calls `breakInheritance("/docs/secret", …)` → bob has `NONE` on `/docs/secret` but alice still has `OWNER` (her own explicit grant is on that folder).
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`splitPath()`**, **`findFolder()`**, **`folderOrThrow()`**, **`addToGroup()`**.
+2. **`createFolder()`** at the top level (creator becomes OWNER) + **`effectivePermission()`** without groups. 🎯 `creatorIsOwnerEveryoneElseHasNothing`, `invalidPaths`
+3. **`share()`** / **`revoke()`** with **`requireOwner()`**, and inheritance in `effectivePermission()`. 🎯 `sharedPermissionIsInheritedByChildren`, `highestPermissionWins`, `onlyOwnersCanShareRevokeOrBreakInheritance`, `revokeRemovesTheExplicitGrant`, `sharingAgainReplacesTheEarlierGrant`
+4. **Groups** in `effectivePermission()`. 🎯 `groupSharesApplyToMembersEvenIfTheyJoinLater`
+5. **Sub-folders need EDIT** in `createFolder()`. 🎯 `creatingFoldersNeedsEditOnTheParent`
+6. **`breakInheritance()`**. 🎯 `breakingInheritanceHidesFoldersFromAncestorGrants`
+
 ## Think about (answer in NOTES.md)
 
 - Computing a permission walks up the whole path. For a path 30 levels deep and a million checks per second, what would you cache — and when must the cache be invalidated?

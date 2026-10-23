@@ -40,6 +40,15 @@ class CityMap {
 
 `A–B 5`, `B–C 5`, `A–C 15`: `A → C` is `Route(10, [A, B, C])`. Close `B–C` → `Route(15, [A, C])`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`addRoad()`** (+ **`putEdge()`**). 🎯 `invalidRoads`, `addingARoadAgainReplacesItsTime` (with step 3)
+2. **`closeRoad()` / `reopenRoad()`** via **`setOpen()`**.
+3. **`fastestRoute()`** — Dijkstra with a priority queue. 🎯 `picksTheFastestNotTheShortestHopCount`, `closuresAndReopening`, `oneWayStreets`, `unreachableAndTrivialRoutes`, `gridCityMatchesManhattanDistance`, `matchesBruteForceTimesOnRandomGraphs`
+4. **Ties** — compare paths with **`comparePaths()`**. 🎯 `tiesPickTheLexicographicallySmallestPath`
+
 ## Think about (answer in NOTES.md)
 
 - Why does Dijkstra fail with **negative** edge weights? Can travel times ever be negative?

@@ -46,6 +46,14 @@ Ordering in the report: `matched` and `amountMismatch` sorted by ledger id; `mis
 
 Ledger `t1 ₹100 day 1`, `t2 ₹250 day 2`. Bank `t1 ₹100 day 2`, `"" ₹250 day 4`. → `t1` matches by reference; `t2` matches the reference-less line by amount (2 days late is within tolerance).
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **Duplicate check** + **`matchByReference()`**. 🎯 `referenceMatchWithDifferentAmountIsAMismatch`, `duplicateReferencesUseTheFirstUnusedLine`, `emptyInputsAndDuplicates`
+2. **`matchFuzzy()`**. 🎯 `exactAndFuzzyMatches`, `outsideToleranceIsNotMatched`, `fuzzyPicksTheClosestDayThenEarlierDayThenListPosition`, `fuzzyProcessesLedgerByDayThenId`, `referenceMatchesWinBeforeFuzzyOnes`, `eachBankLineIsUsedOnce`
+3. **Build the sorted `Report`** in `reconcile()`. 🎯 `reportListsAreSorted`
+
 ## Think about (answer in NOTES.md)
 
 - Fuzzy matching can pair the **wrong** transactions (two ₹250 payments on the same day). How would you lower that risk, and what should the report show?

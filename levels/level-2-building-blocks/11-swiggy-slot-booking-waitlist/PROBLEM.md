@@ -45,6 +45,15 @@ class SlotBooking {
 
 Capacity 2: book a, b, c → a, b confirmed; c waitlisted at 1. Cancel a → c confirmed. `setCapacity(1)` → c (most recently confirmed) goes back to the **front** of the waitlist.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`addSlot()`**, **`slotOrThrow()`**, **`confirmed()`**, **`waitlist()`**.
+2. **`rebalance()`** + **`book()`** + **`status()`**. 🎯 `confirmsUntilFullThenWaitlists`, `bookingIsIdempotentAndOneSlotPerOrder`, `zeroCapacitySlot`
+3. **`cancel()`**. 🎯 `cancellationPromotesTheFirstInLine`, `cancellingAWaitlistedOrderJustRemovesIt`, `promotedOrderCountsAsConfirmedAtPromotionTime`
+4. **`setCapacity()`**. 🎯 `raisingCapacityPromotesInOrder`, `loweringCapacityBumpsMostRecentConfirmationsToTheFront`, `invalidCalls`
+
 ## Think about (answer in NOTES.md)
 
 - Two app servers book the last place in the same slot at the same moment. How do you stop both from succeeding?

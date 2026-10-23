@@ -46,6 +46,15 @@ Read `clock()` once at the start of each `call`.
 
 Threshold 3, open 1000 ms, 2 successes needed. Three failures at t = 0 → OPEN. Calls at t = 500 are rejected instantly. At t = 1000 a call is let through (HALF_OPEN); two successes later the breaker is CLOSED again.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`init`** check + **`state()`**. 🎯 `invalidConfiguration`
+2. **CLOSED** behaviour in `call()`: pass results through, count consecutive failures, open at the threshold. 🎯 `closedPassesResultsThrough`, `failuresReturnTheFallbackAndOpenAtTheThreshold`, `successResetsTheConsecutiveCount`, `thresholdOfOne`
+3. **OPEN**: reject without calling the action until the cooldown ends. 🎯 `openRejectsWithoutCallingTheAction`
+4. **HALF_OPEN**: probe calls; close after enough successes, reopen on a failure. 🎯 `afterTheCooldownItProbesAndClosesAfterEnoughSuccesses`, `aFailureWhileHalfOpenReopensWithAFreshTimer`, `closingResetsFailureCount`
+
 ## Think about (answer in NOTES.md)
 
 - Why count **consecutive** failures? What would an *error-rate over a window* (e.g. 50% of the last 20 calls) do better?

@@ -47,10 +47,10 @@ You don't have to finish every problem in a level before moving up — but try t
 
 ```
 levels/level-2-building-blocks/09-netflix-lru-edge-cache/
-├── PROBLEM.md      ← 1. read: the real situation, what to build, rules, example
+├── PROBLEM.md      ← 1. read: the situation, rules, example + "Your plan, step by step"
 ├── CONCEPTS.md     ← 2. read: the ideas you need, explained (no solution)
 ├── HINTS.md        ← 3. only when stuck: three hints, each hidden until clicked
-├── src/main/kotlin ← 4. write your solution here (replace the TODO()s)
+├── src/main/kotlin ← 4. every function is declared with a comment — fill in the TODO()s, step by step
 ├── src/test/kotlin ← 5. run these; don't edit them
 ├── NOTES.md        ← 6. write your design notes (why, complexity, what breaks at scale)
 └── REVIEW.md       ← 7. score yourself, then get a review (see RATING.md)

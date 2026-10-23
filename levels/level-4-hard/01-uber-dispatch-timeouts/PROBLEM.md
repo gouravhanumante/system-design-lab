@@ -43,6 +43,16 @@ class Dispatcher(offerTimeoutSeconds: Long = 10) {
 
 Drivers `d1` (distance 1) and `d2` (distance 5). `requestRide("r", …, now = 0)` → offer to `d1`. `tick(10)` → `d1` timed out, new offer to `d2`. `tick(20)` → `d2` timed out too → status `FAILED`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`setDriverAvailable()`** — put the driver in the free pool and remember its position.
+2. **`offerToNextDriver()`** + **`requestRide()`** + **`rideStatus()`**. 🎯 `offersTheNearestDriverAndAcceptMatches` (with step 3), `noDriversFailsImmediately`, `reservedDriversAreNotOfferedToOtherRides`
+3. **`accept()`**. 🎯 `offerExpiresExactlyAtTimeout`, `acceptRemovesDriverFromPoolUntilTheyAreAvailableAgain`, `wrongOrStaleCallsAreIgnored`
+4. **`releaseDriver()`** + **`decline()`**. 🎯 `declineMovesToNextNearestAndNeverReoffersToSameDriver`, `declinedDriverBecomesAvailableForOtherRides`
+5. **`tick()`** — expire old offers. 🎯 `timeoutPassesOfferToNextDriverWithFreshTimer`, `tickHandlesSeveralRidesInRideIdOrder`
+
 ## Think about (answer in NOTES.md)
 
 - What if two rides want the same nearest driver at the same moment? How does your design prevent a double offer?

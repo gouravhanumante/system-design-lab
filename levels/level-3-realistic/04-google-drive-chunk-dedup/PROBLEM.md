@@ -39,6 +39,15 @@ class DedupStore(chunkSize: Int) {
 
 `chunkSize = 4`. `put("f1", "AAAABBBB")`, `put("f2", "AAAACCCC")` → distinct chunks `AAAA`, `BBBB`, `CCCC` → `storedBytes = 12`, `logicalBytes = 16`. `delete("f1")` → `BBBB` is freed, `AAAA` stays → `storedBytes = 8`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`chunkKey()`** + **`put()`** (new file names only) + **`get()`**. 🎯 `roundTripsFileContents`
+2. **`storedBytes()`** + **`logicalBytes()`**. 🎯 `sharedChunksAreStoredOnce`, `identicalFilesCostOneCopy`, `shortFinalChunkCountsItsOwnSize`
+3. **`delete()`** with reference counts. 🎯 `repeatedChunkInsideOneFileIsStoredOnceAndReleasedCorrectly`, `deleteOnlyFreesChunksNobodyElseUses`, `emptyFilesAndUnknownNames`
+4. **Overwriting** in `put()` (delete the old version first). 🎯 `overwritingReleasesTheOldChunks`, `overwritingWithTheSameContentKeepsEverythingIntact`
+
 ## Think about (answer in NOTES.md)
 
 - Fixed-size chunking breaks if someone inserts **one byte at the start** of a file: every chunk shifts. How does *content-defined chunking* (rolling hash) fix this?

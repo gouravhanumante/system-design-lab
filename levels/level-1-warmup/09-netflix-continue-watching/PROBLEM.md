@@ -38,6 +38,14 @@ class ContinueWatching(finishedThreshold: Double = 0.95) {
 
 Profile `kid` watches `bluey` to 300 / 420 s at time 10, `pingu` to 60 / 300 s at time 20 → row `[pingu, bluey]`. Then `bluey` to 410 / 420 (≥ 95 %) → row `[pingu]`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`progress()`** + **`isFinished()`** + **`resumePosition()`**. 🎯 `resumesWhereYouStopped`
+2. **`row()`**. 🎯 `rowIsMostRecentFirst`, `finishedTitlesLeaveTheRow`, `rewatchingAFinishedTitleBringsItBack`, `rewindingOverwritesAndUpdatesRecency`, `tiesAreOrderedByTitleId`, `customThreshold`
+3. **`remove()`**. 🎯 `profilesAreSeparateAndRemoveWorks`
+
 ## Think about (answer in NOTES.md)
 
 - Players send progress every few seconds for millions of viewers. Which store would you use, and do you need every update to be saved?

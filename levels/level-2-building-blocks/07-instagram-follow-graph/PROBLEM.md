@@ -38,6 +38,15 @@ class FollowGraph {
 
 `me → a`, `me → b`, `a → x`, `a → y`, `b → x`. Suggestions for `me`: `x` (2 of my followees follow x), then `y` (1).
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`follow()` / `unfollow()`** — update BOTH maps. 🎯 `followAndUnfollowReturnWhetherTheGraphChanged`, `unfollowRemovesBothDirections`
+2. **`followers()` / `following()`**. 🎯 `followersAndFollowingAreMirrorImages`
+3. **`commonFollowing()`**. 🎯 `commonFollowingIsTheIntersection`
+4. **`suggestions()`**. 🎯 `suggestionsRankByNumberOfFolloweesWhoFollowTheCandidate`, `suggestionsExcludeSelfAndAlreadyFollowed`, `suggestionTiesAreBrokenByIdAndLimitApplies`, `noFolloweesMeansNoSuggestions`, `largerGraphScoresCorrectly`
+
 ## Think about (answer in NOTES.md)
 
 - A user follows 5,000 accounts and each of those follows 5,000 more. How big is the 2-hop set? How would you limit the work?

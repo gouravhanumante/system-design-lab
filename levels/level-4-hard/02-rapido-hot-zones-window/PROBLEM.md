@@ -36,6 +36,14 @@ class HotZones(windowSeconds: Int = 300, bucketSeconds: Int = 10) {
 
 Window 30 s, bucket 10 s (3 buckets). Records: `A@0, A@5, B@12, A@25`. At `now = 29` → `A:3, B:1`. At `now = 30` bucket 0 expired → `A:1, B:1`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`record()`** without expiry — add to the current bucket and to `totals`. 🎯 `countsAndSorts`, `tiesAreOrderedByZoneName`, `emptyAndSmallK` (with step 2)
+2. **`topZones()`** — sort `totals`.
+3. **`expireOldBuckets()`** — drop whole buckets that left the window and subtract them from `totals`; call it at the start of both `record` and `topZones`. 🎯 `bucketsExpireAsTimeMovesOn`, `defaultSettingsKeepFiveMinutes`, `queryingBeforeRecordingKeepsCountsConsistent`, `handlesLongStreamsOfEvents`
+
 ## Think about (answer in NOTES.md)
 
 - What is the trade-off of a bigger bucket size? (Accuracy of "exactly last 5 minutes" vs memory and speed.)

@@ -46,6 +46,13 @@ class Presence(onlineTimeoutSeconds: Long = 30) {
 
 `bob` sets `CONTACTS` and adds `alice` as a contact. `alice` sees bob's presence; `carol` sees `"hidden"`. If `alice` sets her own visibility to `NOBODY`, she now sees `"hidden"` for bob too.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`heartbeat()`** + **`view()`** without privacy. 🎯 `onlineWhileHeartbeatsAreFresh`, `becomesLastSeenExactlyAtTheTimeout`, `newerHeartbeatReplacesTheOldOne`, `neverSeenUserIsUnknown`
+2. **`setVisibility()`**, **`addContact()`**, **`canSee()`** — privacy rules. 🎯 `nobodyHidesPresenceFromEveryoneElse`, `contactsOnlyUsesTheTargetsContactList`, `reciprocityHidingYoursHidesEveryonesFromYou`, `contactsViewersAreNotBlockedByReciprocity`, `hiddenBeatsUnknown`
+
 ## Think about (answer in NOTES.md)
 
 - 500 million users sending a heartbeat every 20 seconds is 25 million writes per second. How would you reduce that load? (Fewer heartbeats? Only store "online" in memory? Only notify friends who are looking?)

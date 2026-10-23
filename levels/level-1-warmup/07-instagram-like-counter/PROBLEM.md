@@ -37,6 +37,14 @@ class LikeService {
 
 `ann` likes, `bob` likes, `ann` unlikes, `ann` likes again → `likedBy = ["ann", "bob"]`, count `2`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`like()`** + **`likeCount()`** + **`hasLiked()`**. 🎯 `likingTwiceCountsOnce`
+2. **`unlike()`**. 🎯 `unlikeRemovesAndIsIdempotent`
+3. **`likedBy()`**. 🎯 `likedByIsMostRecentFirst`, `relikingMakesYouTheMostRecent`, `repeatedLikeKeepsTheOriginalPosition`, `postsAreIndependentAndUnknownPostsAreEmpty`
+
 ## Think about (answer in NOTES.md)
 
 - Why return a `Boolean` from `like`? (What would a client or a counter-cache do with it?)

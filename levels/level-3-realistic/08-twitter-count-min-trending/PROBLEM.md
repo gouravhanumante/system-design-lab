@@ -49,6 +49,14 @@ class TrendingTags(k: Int, width: Int = 1024, depth: Int = 4) {
 
 `width = 1000`, few tags → no collisions, estimates are exact. With a tiny `width = 4`, unrelated tags share counters and estimates go **up**, never down.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`CountMinSketch`**: size check, **`add()`**, **`estimate()`**. 🎯 `exactWhenThereIsRoomForEveryone`, `neverUnderestimates`, `collisionsInflateButMinimumHelps`, `invalidSizes`
+2. **`TrendingTags.observe()`** while there's room + **`top()`**. 🎯 `topReportsCurrentEstimates`
+3. **Eviction** in `observe()` with **`weakestCandidate()`**. 🎯 `trendingFindsTheHeavyHitters`, `replacesOnlyWhenStrictlyGreaterAndEvictsTheWeakest`, `tieForWeakestEvictsAlphabeticallyLargest`
+
 ## Think about (answer in NOTES.md)
 
 - Why does taking the **minimum** over several rows reduce the error? What do `width` and `depth` each control?

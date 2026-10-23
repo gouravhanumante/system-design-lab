@@ -44,6 +44,15 @@ class Cart(maxQuantityPerItem: Int = 10) {
 
 `BOOK` 2 × ₹499 + `PEN` 3 × ₹20.50 = 99,800 + 6,150 = 105,950 paise. Coupon 10%, max ₹100 → discount `min(10,595, 10,000)` = 10,000. Total 95,950.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`addItem()`** + **`subtotalPaise()`** + **`lines()`**. 🎯 `subtotalAndLines`, `addingAgainIncreasesQuantityAndKeepsOrder`, `noFloatingPointDrift`
+2. **`setQuantity()`** + **`remove()`**. 🎯 `setQuantityAndRemove`
+3. **Coupons**: `applyCoupon()`, `removeCoupon()`, `discountPaise()`, `totalPaise()`. 🎯 `couponIsCappedAndRoundsDown`, `hundredPercentCouponWithBigCap`
+4. **Validation** everywhere. 🎯 `quantityLimitIsAllOrNothing`, `invalidInputs`
+
 ## Think about (answer in NOTES.md)
 
 - Why is `Double` a bad type for money? Find a concrete example where it gives a wrong total.

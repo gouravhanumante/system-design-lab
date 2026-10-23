@@ -43,6 +43,14 @@ class ChunkedUpload(totalChunks: Int) {
 
 3 chunks. Receive index 2, then 0 → `missingChunks() = [1]`. Receive 1 → `isComplete()` and `assemble()` returns chunk0 + chunk1 + chunk2.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`receive()`** — checks in order: range, checksum, duplicate; then store a copy. 🎯 `duplicateKeepsTheFirstCopy`, `corruptChunkIsRejectedAndCanBeRetried`, `outOfRangeIndexesAreRejected`, `corruptCheckHappensBeforeDuplicateCheck`
+2. **`missingChunks()`** + **`isComplete()`**. 🎯 `missingChunksAreListedAscending`, `zeroChunkUploadIsTriviallyComplete`
+3. **`assemble()`**. 🎯 `outOfOrderUploadAndAssemble`, `assembleBeforeCompleteThrows`, `largeUploadInShuffledOrder`
+
 ## Think about (answer in NOTES.md)
 
 - Why is making `receive` **idempotent** (duplicates are harmless) so important on a bad network?

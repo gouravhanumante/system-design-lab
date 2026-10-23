@@ -36,6 +36,14 @@ class OpeningHours {
 
 Friday `22:00–02:00`: `isOpen(4, "23:59")` = true, `isOpen(5, "01:59")` = true, `isOpen(5, "02:00")` = false. `nextOpening(5, "02:00")` = `(4, "22:00")` — next Friday.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`toMinutes()`** + **`minuteOfWeek()`** — turn day + "HH:MM" into one number. 🎯 `invalidInput` (with step 2)
+2. **`addInterval()`** + **`isOpenAt()`** + **`isOpen()`**. 🎯 `simpleIntervalIsHalfOpen`, `overnightIntervalContinuesNextDay`, `sundayNightWrapsIntoMonday`, `severalIntervalsPerDay`, `noIntervalsMeansNeverOpen`
+3. **`nextOpening()`**. 🎯 `nextOpening`
+
 ## Think about (answer in NOTES.md)
 
 - Time zones: the restaurant is in Kolkata, the server runs in UTC. Where should the conversion happen?

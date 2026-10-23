@@ -45,6 +45,16 @@ class ReplicatedPartition(replicas: List<String>, minInSync: Int = 1) {
 
 `[a, b, c]`: `produce("x")` → offset 0 on `a`; high watermark is still 0. `replicate(b)`: still 0 (c lags). `replicate(c)`: now 1 and `consume() = ["x"]`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`init`** + **`leader()`**, **`isr()`**, **`logOf()`**. 🎯 `initialState`
+2. **`produce()`** + **`replicate()`**. 🎯 `replicatingOnTheLeaderOrAnUnknownNodeDoesNothing`, `produceIsRefusedWhenTooFewReplicasAreInSync` (with step 4)
+3. **`highWatermark()`** + **`consume()`**. 🎯 `messageIsCommittedOnlyWhenEveryIsrMemberHasIt`
+4. **`fail()`** — leaves the ISR; leader election + truncation. 🎯 `failedFollowerLeavesTheIsrSoTheWatermarkCanAdvance`, `leaderFailureElectsFirstIsrMemberAndKeepsCommittedData`, `otherIsrMembersTruncateToTheNewLeadersLog`, `committedDataSurvivesRepeatedLeaderFailures`, `noLeaderMeansNoProduceAndNothingToConsume`
+5. **`recover()`**. 🎯 `recoveredReplicaTruncatesAndMustCatchUpBeforeRejoining`, `uncleanRecoveryWhenThereIsNoLeader`, `failAndRecoverOnDeadOrUnknownReplicas`
+
 ## Think about (answer in NOTES.md)
 
 - `minInSync` trades **availability** for **durability**. With 3 replicas, what does `minInSync = 3` give up? What does `1` risk?

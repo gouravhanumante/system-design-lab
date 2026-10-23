@@ -39,6 +39,14 @@ class HashRing(virtualNodes: Int) {
 
 Ring points at 100 (`A`), 500 (`B`), 900 (`A`). A key at 450 → `B`; at 950 → wraps to 100 → `A`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`init`** check + **`nodes()`**. 🎯 `invalidVirtualNodeCount`
+2. **`rebuildRing()`**, **`addNode()`**, **`removeNode()`**.
+3. **`nodeFor()`**. 🎯 `emptyRingHasNoOwner`, `singleNodeOwnsEverything`, `ownerIsTheFirstPointClockwise`, `removingANodeOnlyMovesItsOwnKeys`, `addingANodeOnlyTakesKeysForItself`, `virtualNodesSpreadTheLoad`, `addingTwiceAndRemovingUnknownAreHarmless`
+
 ## Think about (answer in NOTES.md)
 
 - Measure it: with 4 servers, how many of 10,000 keys move when a 5th is added — with your ring, and with `hash % N`?

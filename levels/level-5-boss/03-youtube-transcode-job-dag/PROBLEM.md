@@ -48,6 +48,16 @@ class JobScheduler(workers: Int, maxAttempts: Int = 3, failures: (jobId: String,
 
 `a(10)`, `b(5, after a)`, `c(5, after b)` with 2 workers → finish times `a=10, b=15, c=20`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`submit()`** — duplicates and unknown dependencies. 🎯 `invalidSubmissionsAreRejected` (with step 2)
+2. **`hasCycle()`** — Kahn's algorithm (repeatedly remove jobs with no remaining dependencies).
+3. **`pickNextReady()`** — which job a free worker takes.
+4. **`run()`** without failures — the simulation loop. 🎯 `chainRunsSequentially`, `workersLimitParallelism`, `higherPriorityStartsFirstThenSmallerId`, `youtubePipeline`, `emptyScheduleHasZeroMakespan`
+5. **Retries and permanent failure** in `run()` + **`skipDependents()`**. 🎯 `retriesUntilSuccess`, `permanentFailureSkipsEverythingThatDependsOnIt`, `aRetryCompetesWithOtherReadyJobsByPriority`
+
 ## Think about (answer in NOTES.md)
 
 - Retrying instantly can hammer a struggling dependency. What would **backoff** change in your simulation?

@@ -34,6 +34,13 @@ class ViewCounter {
 
 Views: `a, b, a, c, b, a` → `top(2) = [("a", 3), ("b", 2)]`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`view()`** + **`views()`**. 🎯 `countsViewsPerVideo`, `handlesManyViews`
+2. **`top()`**. 🎯 `topReturnsMostViewedFirst`, `tiesAreBrokenByVideoId`, `zeroAndEmptyCases`
+
 ## Think about (answer in NOTES.md)
 
 - Time complexity of `top(n)` as written? If it is called on every page load, what could you do about it?

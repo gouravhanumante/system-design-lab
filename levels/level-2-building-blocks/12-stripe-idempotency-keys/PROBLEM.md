@@ -40,6 +40,14 @@ class PaymentApi(processor: (ChargeRequest) -> String, ttlSeconds: Long = 86_400
 
 `createCharge("k1", ₹499)` → `ch_1`, replayed false. Again with `k1` → `ch_1`, replayed true, still 1 processor call. `k1` with ₹999 → `IdempotencyConflict`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`createCharge()`** without stored keys — call the processor every time. 🎯 `differentKeysAreDifferentCharges`, `blankKeysAreRejected`, `processorFailureStoresNothing`
+2. **Store and replay** by key. 🎯 `firstCallChargesAndRetryReplays`, `sameKeyDifferentRequestIsAConflict`
+3. **Expiry**. 🎯 `keysExpire`
+
 ## Think about (answer in NOTES.md)
 
 - Two retries of the same key arrive at **the same time** on two servers. What can go wrong with your code, and how would a real system lock the key while the first request is in flight?

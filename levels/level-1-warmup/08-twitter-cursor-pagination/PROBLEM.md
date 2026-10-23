@@ -40,6 +40,13 @@ class UserTimeline {
 
 User tweets with ids `1..5`. `page(u, null, 2)` → `[5, 4]`, cursor `4`. `page(u, 4, 2)` → `[3, 2]`, cursor `2`. `page(u, 2, 2)` → `[1]`, cursor `null`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`post()`** + **`delete()`** — keep both maps in sync.
+2. **`page()`**. 🎯 all tests (`walksAllPagesNewestFirst`, `exactFitHasNoNextCursor`, `deletionsBetweenPagesNeverCauseSkipsOrDuplicates`, `newTweetsDoNotShiftLaterPages`, `usersAreSeparate`, `edgeCases`)
+
 ## Think about (answer in NOTES.md)
 
 - Show with a small example how **offset** pagination (`skip 2, take 2`) breaks when a tweet is deleted between two page loads.

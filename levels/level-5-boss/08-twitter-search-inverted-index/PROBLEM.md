@@ -49,6 +49,16 @@ class TweetSearch {
 Tweets: `1 "world cup final tonight"`, `2 "the cup of the world"`, `3 "World Cup spoiler: ARG wins"`.
 `search("world cup", 10)` → `[3, 2, 1]`. `search("\"world cup\"", 10)` → `[3, 1]`. `search("\"world cup\" -spoiler", 10)` → `[1]`.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`tokenize()`** + **`index()`** + **`delete()`** — the inverted index with positions.
+2. **`parseQuery()`**.
+3. **`search()`** for plain terms (AND, newest first, limit). 🎯 `termsAreAndedAndNewestComesFirst`, `tokenizingIsCaseInsensitiveAndKeepsHashtagsAndMentions`, `limitApplies`, `deleteAndReplace`, `manyTweets`
+4. **Exclusions**. 🎯 `exclusionsRemoveMatches`
+5. **`containsPhrase()`** — phrases. 🎯 `phrasesNeedConsecutiveTokensInOrder`, `phraseCanMatchLaterOccurrence`, `mixedQueryWithPhraseTermsAndExclusion`
+
 ## Think about (answer in NOTES.md)
 
 - Which list should you start intersecting with, and why? (Hint: "the" appears in half of all tweets.)

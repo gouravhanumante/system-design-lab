@@ -48,6 +48,15 @@ Each cache entry remembers its value (possibly `null` = "does not exist") and `l
 
 TTL 60, stale 30. Loaded at 0. `get` at 59 → fresh. At 70 → stale (old value returned, refresh queued). `runRefreshes(71)` reloads it. At 100 → fresh again (age 29). Without a refresh, at 90 it would be a miss.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`get()`** — fresh hit, or miss → load from the DB and cache. 🎯 `firstReadMissesThenHits`, `tooOldIsAMiss`
+2. **Stale-while-revalidate** in `get()` + **`runRefreshes()`**. 🎯 `staleValueIsServedAndRefreshedInTheBackground`, `refreshesRunInQueueOrderAndCanStoreDeletions`
+3. **Negative caching** in `get()`. 🎯 `missingProductsAreNegativelyCached`, `aProductCreatedLaterAppearsAfterTheNegativeTtl`
+4. **`update()`**. 🎯 `updateWritesTheDatabaseFirstThenInvalidates`, `updateCancelsAPendingRefresh`
+
 ## Think about (answer in NOTES.md)
 
 - Why delete the cache entry on update instead of writing the new value into it? (Think of two updates racing.)

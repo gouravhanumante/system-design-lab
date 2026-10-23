@@ -41,6 +41,14 @@ class BitrateSelector(ladderKbps: List<Int>, safetyFactor: Double = 0.8, window:
 
 Ladder `[500, 1000, 3000, 6000]`. One sample of 10,000 kbps → target 6000 (≤ 8000). With 20 s of buffer the player climbs one rung per decision: 1000, 3000, 6000. A sudden sample of 1,000 kbps pulls the harmonic mean down hard and the player drops immediately.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`init`** checks. 🎯 `invalidLadder`
+2. **`onSegmentDownloaded()`** + **`estimateKbps()`**. 🎯 `throughputAndHarmonicMean`, `onlyTheLastWindowSamplesCount`
+3. **`highestAffordableRung()`** + **`choose()`**. 🎯 `startsLowWithoutData`, `climbsOneRungAtATimeWithAHealthyBuffer`, `doesNotClimbWithAThinBuffer`, `dropsImmediatelyAndAllTheWayToTheTarget`, `panicModeWhenTheBufferIsNearlyEmpty`, `safetyFactorKeepsHeadroom`, `veryLowBandwidthStillPlaysTheLowestRung`
+
 ## Think about (answer in NOTES.md)
 
 - Why harmonic mean rather than the normal average? Try samples 1,000 and 100,000 kbps with both.

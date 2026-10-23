@@ -47,6 +47,16 @@ class Stories(ttlSeconds: Long = 86_400) {
 
 TTL 100. `ann` posts `s1` at 0 for close friends and `bob` is one. At 50 bob can view. `ann` removes bob → bob cannot view, but `viewers("s1")` still contains bob. At 100 even ann cannot view `s1` — unless she highlighted it before.
 
+## Your plan, step by step
+
+The starter file already declares **every function and field you need** — each one has a comment saying exactly what it must do. Fill them in in this order and run the tests after each step. 🎯 marks the tests that check each step (a few also need a later step before they go green).
+
+1. **`post()`**, **`isLive()`**, **`isAllowed()`**, **`canView()`** — expiry and audiences. 🎯 `storiesExpireAfterTheTtl`, `everyoneStoriesAreOpenToAll`, `reposingAnExistingIdIsIgnored`
+2. **`addCloseFriend()` / `removeCloseFriend()`**. 🎯 `closeFriendsStoriesAreRestrictedAndCheckedAtViewTime`, `friendAddedLaterCanSeeExistingStories`
+3. **`view()` + `viewers()`**. 🎯 `viewersAreUniqueOrderedAndExcludeTheOwner`, `blockedViewsAreNotRecordedAndEarlierViewsSurviveAccessChanges`
+4. **`visibleStories()`**. 🎯 `visibleStoriesAreOldestFirstAndRespectAudienceAndExpiry`
+5. **`highlight()`**. 🎯 `highlightsNeverExpireButKeepTheirAudience`, `onlyLiveStoriesOfTheOwnerCanBeHighlighted`
+
 ## Think about (answer in NOTES.md)
 
 - Expiry: do you delete expired stories with a background job, check the clock on every read, or both? What are the failure modes of each?
